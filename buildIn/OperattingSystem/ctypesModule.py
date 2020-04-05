@@ -4,18 +4,20 @@ import os
 
 # '''
 # ctypes.util模块
+# C++源码为xx.cpp，编译的动态链接库为xx.dll
 # '''
 # 查找系统库
 # dllPath = ctypes.util.find_library("kernel32")
 # print("dllPath is", dllPath)
 
 # 查找自定义库
-# dllPath = ctypes.util.find_library("cygxx")
+# dllPath = ctypes.util.find_library("xx")
 # print("dllPath is", dllPath)
 
 
 # '''
 # ctypes模块
+# C++源码为xx.cpp，编译的动态链接库为xx.dll
 # '''
 ### 加载动态链接库 ###
 with os.add_dll_directory(os.getcwd()):  # 增加库目录
