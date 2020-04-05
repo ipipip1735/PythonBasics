@@ -1,0 +1,5 @@
+2020-03-26 06:44:01 - A - DEBUG - [debug]xxx
+2020-03-26 06:44:01 - A - INFO - [info]xxx
+2020-03-26 06:44:01 - A - WARNING - [warning]xxx
+2020-03-26 06:44:01 - A - ERROR - [error]xxx
+2020-03-26 06:44:01 - A - CRITICAL - [critical]xxx
