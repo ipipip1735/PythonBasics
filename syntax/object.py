@@ -76,6 +76,29 @@ import abc
 
 
 # '''
+# 静态成员的继承
+# '''
+# class Aa:
+#     one = 1
+#     two = lambda x: print('x is =', x)
+#     ...
+# class Bb(Aa):...
+# class Cc(Aa):
+#     one = 33
+#     two = lambda : print('~~Cc.two~~')
+#     ...
+#
+# print('Aa.one=', Aa.one, ', Bb.one=', Bb.one, ', Cc.one=', Cc.one, sep='')
+# Aa.two(111)
+# Bb.two(222)
+# Cc.two()
+
+
+
+
+
+
+# '''
 # 多继承
 # '''
 # class Aa:
@@ -260,22 +283,61 @@ import abc
 # '''
 # 抽象方法
 # '''
-class A(abc.ABC):
+# 方法一
+# class A(abc.ABC):
+#
+#     def show(self):
+#         print("++ " + __class__.__name__ + ".show() ++")
+#
+#     @abc.abstractmethod
+#     def see(self):...
+#
+# class B(A):
+#     def see(self):...
+#
+# print(issubclass(B, A))
+# b = B()
+# b.see()
+# b.show()
 
-    def show(self):
-        print("++ " + __class__.__name__ + ".show() ++")
+# 方法二
+# class C(metaclass=abc.ABCMeta):
+#     @abc.abstractmethod
+#     def see(self): ...
+#
+#     @classmethod
+#     def __subclasshook__(cls, XX):
+#         print('cls is', cls, ', XX is', XX)
+#         return True
+#     ...
+#
+# class D(C):
+#     def see(self):
+#         print('~~D.see~~')
+#     ...
+#
+# # D().see()
+# C.register(D)
+# print("-----")
+# print(isinstance(D(), C))
+# print("******")
+# print(issubclass(D, C))
 
+# '''
+# 抽象类方法
+# '''
+class E(abc.ABC):
+    @classmethod
     @abc.abstractmethod
-    def see(self):...
+    def SHOW(cls):...
 
-class B(A):
-    def see(self):...
+class F(E):
+    @classmethod
+    def SHOW(cls):
+        print('cls is', cls)
+
+F.SHOW()
 
 
-print(issubclass(B, A))
 
-
-b = B()
-b.see()
-b.show()
 
