@@ -23,22 +23,22 @@
 
 
 '''孵化'''
-#! /usr/bin/env python3
-import time, os
-from multiprocessing import Process, set_start_method
-
-def fn():
-    time.sleep(2)
-    print('os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
-
-
-if __name__ == '__main__':
-    print('start|os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
-    p = Process(target=fn)
-    set_start_method('spawn')
-    p.start()
-    p.join()
-    print('end|os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
+## ! /usr/bin/env python3
+# import time, os
+# from multiprocessing import Process, set_start_method
+#
+# def fn():
+#     time.sleep(2)
+#     print('os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
+#
+#
+# if __name__ == '__main__':
+#     print('start|os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
+#     p = Process(target=fn)
+#     set_start_method('spawn')
+#     p.start()
+#     p.join()
+#     print('end|os.getpid() = %d, os.getppid() = %d' % (os.getpid(), os.getppid()))
 
 
 # '''
@@ -70,6 +70,20 @@ if __name__ == '__main__':
 #     p.join()
 #     # time.sleep(4)
 #     print('os.getpid()=%s, os.getppid()=%s' % (os.getpid(), os.getppid()))
+
+
+# 方法三：使用进程池
+import time, multiprocessing, os
+
+def runnable(arg):
+    time.sleep(1)
+    print('~~Run~~|arg=%s, os.getpid()=%s, os.getppid()=%s' % (arg, os.getpid(), os.getppid()))
+    return arg + 1
+
+if __name__ == '__main__':
+    p = multiprocessing.get_context('spawn').Pool()
+    r = p.map(runnable, [1,3,5])
+    print(r)
 
 
 # '''
